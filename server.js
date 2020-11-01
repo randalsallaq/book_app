@@ -22,6 +22,9 @@ app.get('/',(req,res)=>{
     res.render('./pages/index');
 });
 
+app.get('/searches/new',(req,res)=>{
+    res.render('./pages/searches/new');
+});
 // listen to app
 app.listen(PORT ,() =>{
     console.log(` listing to port ${PORT}`);
