@@ -25,13 +25,13 @@ app.get('/searches/new', (req, res) => {
     res.render('./pages/searches/new');
 });
 
-app.post('/searches', handleSearches);
+app.get('/searches', handleSearches);
 
 
 //API
 function Book(objbook) {
-
-    this.img = objbook.volumeInfo.imageLinks;
+   
+    if(objbook.volumeInfo.imageLinks ===undefined){this.img ='https://i.imgur.com/J5LVHEL.jpg'}else{this.img = objbook.volumeInfo.imageLinks.thumbnail;}
     this.title = objbook.volumeInfo.title;
     this.author = objbook.volumeInfo.authors;
     this.description = objbook.volumeInfo.description;
@@ -39,7 +39,7 @@ function Book(objbook) {
 
 }
 
-let objectsArray = [];
+
 function handleSearches(request, response) {
     let titleAuthor = request.query.titleAuthor;
 
@@ -47,21 +47,18 @@ function handleSearches(request, response) {
     let filter= request.body.search;
     let url = `https://www.googleapis.com/books/v1/volumes?q=${titleAuthor}+in${filter}`;
 
-
-
-
     superagent.get(url).then(data => {
         let objectApi = data.body.items;
-        // console.log(objectApi);
-        let bookArr = objectApi.map(element => {
+      
+       let bookArr = objectApi.map(element => {
            
-            console.log('inside', element);
+         
 
-            return new Book(element);
-        });
+          return new Book(element);
+         });
     
-       
-            response.render('./pages/searches/show', {bookObjects: bookArr});
+   
+        response.render('./pages/searches/show', {bookObjects: bookArr});
           
           
        
