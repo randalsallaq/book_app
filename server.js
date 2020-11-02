@@ -30,8 +30,18 @@ app.get('/searches', handleSearches);
 
 //API
 function Book(objbook) {
-   
-    if(objbook.volumeInfo.imageLinks ===undefined){this.img ='https://i.imgur.com/J5LVHEL.jpg'}else{this.img = objbook.volumeInfo.imageLinks.thumbnail;}
+
+    if (objbook.volumeInfo.imageLinks === undefined) {
+        this.img = 'https://i.imgur.com/J5LVHEL.jpg'
+    } else {
+        if (!(/https:\/\//.test(objbook.volumeInfo.imageLinks.thumbnail))) {
+            console.log(objbook.volumeInfo.imageLinks.thumbnail);
+            this.img = 'https' + objbook.volumeInfo.imageLinks.thumbnail.slice(4);
+            console.log('after', this.img);
+        } else {
+            this.img = objbook.volumeInfo.imageLinks.thumbnail;
+        }
+    }
     this.title = objbook.volumeInfo.title;
     this.author = objbook.volumeInfo.authors;
     this.description = objbook.volumeInfo.description;
@@ -40,17 +50,17 @@ function Book(objbook) {
 
 function handleSearches(request, response) {
     let titleAuthor = request.query.titleAuthor;
-    let filter= request.body.search;
+    let filter = request.body.search;
     let url = `https://www.googleapis.com/books/v1/volumes?q=${titleAuthor}+in${filter}`;
 
     superagent.get(url).then(data => {
         let objectApi = data.body.items;
-       let bookArr = objectApi.map(element => {
-          return new Book(element);
-         });
-    
-   
-        response.render('./pages/searches/show', {bookObjects: bookArr});
+        let bookArr = objectApi.map(element => {
+            return new Book(element);
+        });
+
+
+        response.render('./pages/searches/show', { bookObjects: bookArr });
 
     }).catch(error => {
 
