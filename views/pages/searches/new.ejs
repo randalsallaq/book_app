@@ -8,11 +8,12 @@
 </head>
 
 <body>
-    <form action="/searches" method="get">
-        <fieldset>
-            <legend> BOOK-API
-
-                <input type="text" name="titleAuthor" id="" placeholder="enter a title or author">
+    <main>
+        <h4> Searches By Title or  Auther </h4>
+    <form action="/searches" method="post">
+        <legend> 
+            <fieldset> 
+                <input type="text" name="titleAuthor" id="" placeholder="enter a title or author" required>
                 <br><br>
                 <label for="title">Title</label> 
                 <input type="radio" name="search" value="title">
@@ -22,10 +23,10 @@
                 <input type="radio" name="search" value="author">
                 <br><br>
                 <input type="submit" value="search Google Books API">
-
-            </legend>
-        </fieldset>
+            </fieldset>
+        </legend>
     </form>
+</main>
 </body>
 
 </html>
