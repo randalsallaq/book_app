@@ -1,25 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
 </head>
+
 <body>
     <main>
 
-        <% bookObjects.forEach((item ,index) => { %>
-            <div class="child " id="<%= index %>">
-            <img src="<%= item.img %>" alt="">
-            <h2> <%= item.title %></h2>
-            <h3> <%= item.author %></h3>
-           
-            <p> <%= item.description %></p>
-        </div>
-            
-          <% }); %>
+        <% bookObjects.forEach(item  => { %>
+        <form action="/details" method="get" target="_blank">
+            <legend>
+                <fieldset>
+                        <img src="<%= item.img %>" alt="">
+                        <h2>Title :<%= item.title %></h2>
+                        <h3>Auther : <%= item.author %></h3>
+                        <p> Description: <%= item.description %></p>
+                        <input  type="submit" value="Select this book">
+                        <br>
+                </fieldset>
+            </legend>
+        </form>
+
+        <% }); %>
 
     </main>
 </body>
+
 </html>
