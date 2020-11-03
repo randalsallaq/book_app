@@ -11,18 +11,25 @@
 <body>
     <main>
 
-        <% bookObjects.forEach(item  => { %>
-        <form action="/details" method="get" target="_blank">
-            <legend>
-                <fieldset>
-                        <img src="<%= item.img %>" alt="">
-                        <h2>Title :<%= item.title %></h2>
-                        <h3>Auther : <%= item.author %></h3>
-                        <p> Description: <%= item.description %></p>
-                        <input  type="submit" value="Select this book">
-                        <br>
-                </fieldset>
-            </legend>
+        <% bookObjects.forEach(book  => { %>
+        <form action="/book/<%=book.id%>" method="post">
+            <fieldset> 
+              ID: <p><%=book.id%> </p>
+            <input type="image" src="<%=book.img %>" alt=""> <br> <br>
+             <span>Title :</span>
+                <input value="<%= book.title %>" type="text" name="title">
+                <br><br>
+                <span>Author:</span>
+                <input type="text" name="author" value="<%= book.author %>">
+                <br>
+                <br>
+                <span> Description: </span> <br> 
+                <textarea name="textarea" cols="60" rows="20">
+                 <%= book.description %>
+                 </textarea> <br><br>
+                <input type="submit" value="Add to book shelf :(">
+            </fieldset>
+
         </form>
 
         <% }); %>

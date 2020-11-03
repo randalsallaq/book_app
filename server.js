@@ -32,8 +32,9 @@ app.get('/searches/new', (req, res) => {
 });
 
 app.post('/searches', handleSearches);
+app.post('/books',handlesave);
 
-app.get('/book/:id', handleBook);
+app.post('/book/:id', handleBook);
 
 
 function Book(objbook) {
@@ -52,6 +53,7 @@ function Book(objbook) {
     this.title = objbook.volumeInfo.title;
     this.author = objbook.volumeInfo.authors;
     this.description = objbook.volumeInfo.description ? objbook.volumeInfo.description : "placeholder";
+    this.isbn=objbook.industryIdentifiers;
 }
 
 
@@ -76,7 +78,7 @@ function handleIndex(req, res) {
         console.log(err);
     });
 }
-//API
+//API 
 
 function handleSearches(request, response) {
     let titleAuthor = request.body.titleAuthor;
@@ -85,6 +87,7 @@ function handleSearches(request, response) {
     console.log(url);
     superagent.get(url).then(data => {
         let objectApi = data.body.items;
+
         let bookArr = objectApi.map(element => {
             return new Book(element);
         });
@@ -94,13 +97,26 @@ function handleSearches(request, response) {
         console.log('something went wrong ', error);
     });
 }
+function handlesave(req,res){
+    
+
+}
+
+
+
+
+
+
+
+
+
 
 function handleBook(req, res) { //renser single book to viwe-pages-books-detail.ejs
     let sql = 'SELECT * FROM tasks WHERE id=$1;'
     let bookid = [req.params.id];
     return client.query(sql, bookid)
         .then(data => {
-            return res.render('./pages/books/detail', { book: data.rows[0] });
+            return res.render('pages/books/detail', { book: data.rows[0] });
         })
         .catch(err => handleError(err, res));
 }
