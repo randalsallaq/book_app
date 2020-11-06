@@ -1,0 +1,16 @@
+
+<div id="deleteFromMain" style="display: none;">
+<form  action="/books/<%= book.id %>?_method=PUT" method="POST">
+<input type="text" name="id" id="bookid" value="<%= book.id%>">
+    <input type="text" name="image_url" value="<%= book.image_url %>">
+    <input value="<%= book.title %>" type="text" name="title"><br>
+    <input type="text" name="author" value="<%= book.author %>"><br>
+    <textarea name="descriptions" cols="60" rows="20">
+       <%= book.descriptions %> 
+    </textarea><br>
+    <input name="isbn" value="<%= book.isbn %>">
+    <br>
+    <input type="submit" value="Edit Details" >
+
+   </form>
+</div>
