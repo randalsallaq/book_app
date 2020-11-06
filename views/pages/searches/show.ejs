@@ -1,52 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-
 </head>
-
 <body>
     <main>
-
         <% bookObjects.forEach(book  => { %>
-              <!-- ID: <p><%=book.id%> </p> -->
-            <!-- <input type="image" src="<%=book.img %>" alt="" name="image"> <br> <br> -->
-            <p>
+             <p>
                 <img src="<%=book.image_url %>" alt="">
             </p>
             <span>Title :</span>
             <p><%= book.title %></p>
-                <!-- <input value="<%= book.title %>" type="text" name="title" class="hidden"> -->
-                <!-- <br><br>-->
              <span>Author:</span>
              <p><%= book.author %></p>
-                <!-- <input type="text" name="author" value="<%= book.author %>" class="hidden"> -->
                 <br>
                 <br>
                 <span> Description: </span> <br> 
                 <p> <%= book.description %></p>
-                <!-- <textarea name="description" cols="60" rows="20">
-                 <%= book.description %> -->
-                 <!-- </textarea> <br><br> -->
-                <!-- <input type="submit" value="Add to book shelf">
-                 -->
-               
-                <a href="">select this book</a>
+                <span> ISBN: </span>  
+                <p> <%= book.isbn %></p>
+                
         <br>
-        <form action="/book/<%= book.id%>" method="post" class="hidden">
+        <div class="updateForm" style="display: none;">
+
+        <form action="/book" method="post" type="hidden">
          <input type="text" name="image_url" value="<%= book.image_url %>">
          <input value="<%= book.title %>" type="text" name="title"><br>
          <input type="text" name="author" value="<%= book.author %>"><br>
-         <textarea name="description" cols="60" rows="20">
-            <%= book.description %> -->
+         <textarea name="descriptions" cols="60" rows="20">
+            <%= book.description %> 
          </textarea><br>
+         <input name="isbn" value="<%= book.isbn %>">
+         <br>
+        </div>
          <input type="submit" value="save to database">
         </form>
+    
         <% }); %>
+   
     </main>
 </body>
-
 </html>

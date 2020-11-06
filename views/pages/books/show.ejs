@@ -5,14 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/base.css">
     <title>Book-API</title>
+
 </head>
 <body>
-   <div>
-       <h2>Title :<%= book.title %></h2>
-       <h3>Author : <%= book.author %></h3>
-       <img src="<%= book.image_url %>" alt="">
-       <p>Description: <%= book.description %></p>
-   </div>
-</body>
+   
+ <%- include('detail',{book:book})%>
+ <%- include('edit') %>
 
+ <form action="/book/<%= book.id %>?_method=DELETE" method="POST">
+
+    <input type="hidden" value="<%= book.id %>" name="id">
+    <input type="submit" value="delete book">
+ </form>
+
+<button id="updatebutton">Update</button>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+ <script src="../../../public/app.js"></script>
+</body>
 </html>

@@ -1,3 +1,4 @@
+  
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,11 +9,17 @@
 </head>
 <body>
     <%book.forEach(element  => { %>
+        <div data-id>
         <h2>Title :<%= element.title %></h2>
         <h3>Author : <%= element.author %></h3>
-        <img src="<%= element.img %>" alt="">
-        <p>Description: <%= element.description %></p>
-    <% }); %>
-</body>
+        <img src="<%= element.image_url %>" alt="">
+        <p>Description: <%= element.descriptions %></p>
+        <p>ISBN: <%= element.isbn %></p>
+    </div>
+    <input id="detailsBtn" type="submit" value="Show Details" onclick="location.href = `/book/${<%= element.id %>}`;" ><br>
 
+    <% }); %>
+
+    <p>Total Books: <%= total %></p>
+</body>
 </html>
