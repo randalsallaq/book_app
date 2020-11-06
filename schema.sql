@@ -5,6 +5,7 @@ CREATE TABLE book(
     title VARCHAR(255),
     isbn VARCHAR(255),
     image_url VARCHAR(255),
+
     descriptions TEXT
 );
 INSERT INTO book (author,title, isbn, image_url,descriptions)
@@ -21,3 +22,7 @@ VALUES (
  'ISBN_10 9668020944',
  'http://books.google.com/books/content?id=ghEiyQEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api',
   'تومي وتوبنس شابان ، في حالة حب ... وكسرت الشقة. يزعجهم الإثارة ، يقررون الشروع في مخطط أعمال جريء على استعداد لفعل أي شيء ، والذهاب إلى أي مكان.');
+
+    description VARCHAR(255)
+);
+
